@@ -29,9 +29,9 @@ public:
     }
 
     Reg& in(const std::function<T()>& next){
+        infunc = next;
         if(enfunc()){
-            infunc = next;
-            // val_eval = infunc();
+            val_eval = infunc();
         }
         return *this;
     }
@@ -43,7 +43,7 @@ public:
     Reg& in(const T& next){
         if(enfunc()){
             infunc = [next](){return next;};
-            // val_eval = infunc();
+            val_eval = infunc();
         }
         return *this;
     }
@@ -53,9 +53,10 @@ public:
     }
     
     Reg& in(const Reg& next){
+        assert((&next)!=this);
+        infunc = [&next](){return next.out();};
         if(enfunc()){
-            infunc = [&next](){return next.out();};
-            // val_eval = infunc();
+            val_eval = infunc();
         }
         return *this;
     }

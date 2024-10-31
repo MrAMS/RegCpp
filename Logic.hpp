@@ -1,6 +1,7 @@
 #pragma once
 #include <algorithm>
 #include <cassert>
+#include <cstdint>
 #include <vector>
 
 #include <cstdio>
@@ -25,7 +26,9 @@ public:
         for(auto& m : all){
             m->update();
         }
+        cycs += 1;
     }
+    static inline uint64_t cycs=0;
 protected:
     virtual void eval()=0;
     virtual void update()=0;

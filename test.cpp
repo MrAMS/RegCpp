@@ -20,9 +20,11 @@ TEST_CASE( "Reg work good", "[Reg]" ) {
 
     SeqLogic::clock_step();
     OUT_REQUIRE(r1==1);
+    REQUIRE(SeqLogic::cycs==1);
 
     SeqLogic::clock_step();
     OUT_REQUIRE(r1==2);
+    REQUIRE(SeqLogic::cycs==2);
 
     r1 = 0;
     SeqLogic::clock_step();
@@ -49,7 +51,7 @@ TEST_CASE( "RegEnable work good", "[RegEnable]" ) {
     Reg<uint32_t> r2(0);
     Reg<uint32_t> r3(1);
 
-    r2.in(r2+1).en((r1==1) && (r3==1));
+    r2.en((r1==1) && (r3==1)).in(r2+1); // must en before in
     OUT_REQUIRE(r1==0);
     OUT_REQUIRE(r2==0);
 
