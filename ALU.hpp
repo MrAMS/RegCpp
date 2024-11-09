@@ -56,10 +56,10 @@ public:
                 return A^B;
                 break;
             case LT:
-                return static_cast<std::make_signed_t<T>>(A)<static_cast<std::make_signed_t<T>>(B);
+                return static_cast<std::make_signed_t<T>>(A) < static_cast<std::make_signed_t<T>>(B);
                 break;
             case LTU:
-                return static_cast<std::make_unsigned_t<T>>(A)<static_cast<std::make_unsigned_t<T>>(B);
+                return static_cast<std::make_unsigned_t<T>>(A) < static_cast<std::make_unsigned_t<T>>(B);
                 break;
             default:
                 assert(0);
